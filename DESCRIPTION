@@ -1,0 +1,23 @@
+Package: fcci
+Type: Package
+Title: Feldman-Cousins Confidence Intervals
+Version: 1.0.0
+Authors@R: 
+    person(given = "Valerio",
+           family = "Gherardi",
+           role = c("aut", "cre"),
+           email = "vgherard@sissa.it",
+           comment = c(ORCID = "0000-0002-8215-3013"))
+Maintainer: Valerio Gherardi <vgherard@sissa.it>
+Description: 
+	Utilities for building Feldman-Cousins confidence intervals 
+	[G. J. Feldman and R. D. Cousins (1998) <doi:https://doi.org/10.1103/PhysRevD.57.3873>]
+	for Poisson rates and binomial proportions.
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
+LinkingTo: 
+    Rcpp
+Imports: 
+    Rcpp
