@@ -10,6 +10,14 @@ Utilities for building Feldman-Cousins confidence intervals
 	[G. J. Feldman and R. D. Cousins (1998) <doi:https://doi.org/10.1103/PhysRevD.57.3873>]
 	for Poisson rates and binomial proportions.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/vgherard/fcci}
+  \item Report bugs at \url{https://github.com/vgherard/fcci/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Valerio Gherardi \email{vgherard@sissa.it} (\href{https://orcid.org/0000-0002-8215-3013}{ORCID})
 

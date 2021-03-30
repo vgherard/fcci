@@ -1,3 +1,57 @@
+#' Poisson rate confidence intervals
+#' @description
+#' Build confidence intervals for the rate of a Poisson random variable using
+#' the Feldman-Cousins **ref** construction.
+#' @param n number of events. Numeric vector of length one.
+#' @param b expected number of background events. Numeric vector of length one
+#' or three (see Details).
+#' @param cl confidence level for the returned confidence interval.
+#' A number between zero and one.
+#' @param acc required accuracy in the confidence interval endpoints.
+#' A positive number.
+#' @param lambda_min,lambda_max window of Poisson rate
+#' values for whom the Neyman belt construction is performed. Numeric vectors of
+#' length one or \code{NULL} (see Details). For advanced users only, use the
+#' default value (\code{NULL}) if unsure.
+#' @return a numeric vector of length two, containing the confidence interval
+#' endpoints.
+#' @details The Feldman-Cousins **ref** confidence intervals construction
+#' provides a unified treatment for the estimation of Poisson rates, which
+#' produces consistent results for both the common case, where the number of
+#' observed events \code{n} is greater than the number of background events
+#' \code{b}, and the boundary cases, when \code{n} is equal or even less than
+#' \code{b}. In these last cases, a naive treatment can lead to either
+#' overcovering (that is, unnecessarily large confidence intervals;
+#' this is the case for, *e.g.*, the intervals returned from
+#' \code{stats::poisson.test} for zero events and no background) or,
+#' even worse, undercovering and/or non-sensical confidence intervals
+#' (relevant examples can be found in Ref. **ref**).
+#'
+#' In order to find confidence intervals, the standard Neyman construction
+#' is performed over a grid of values for the estimated rate. The search
+#' interval can be controlled through the parameters \code{lambda_min} and
+#' \code{lambda_max}; if these are left as default (\code{NULL}), they are
+#' estimated automatically based on a rough estimate, which should be adequate
+#' in the majority of cases.
+#'
+#' The argument \code{b} controls the expected number of background events,
+#' which may differ from zero if not all counts are expected to correspond
+#' to genuine events. The number of total counts \code{n} is thus assumed to
+#' follow a Poisson distribution with rate \code{lambda + b}, with \code{b}
+#' known and \code{lambda} unknown and to be estimated.
+#'
+#' Ref. **ref** discusses a minor correction to confidence intervals, which
+#' ensures that the produced upper limits are decreasing functions of \code{b}.
+#' This is computationally intensive and not necessary for the correctness of
+#' Feldman-Cousins confidence intervals, but may facilitate interpretation for
+#' e.g. sensitivity analyses.
+#' The correction can be implemented by providing a length three numeric to the
+#' \code{b} argument, such that \code{b[[1]]} is the expected background rate as
+#' before, while \code{b[[2]]} and \code{b[[3]]} represent a maximum value
+#' for \code{b} and a grid step. The construction is repeated over the whole
+#' grid of \code{b} values and the actual upper limit is chosen as the
+#' greatest upper limit encountered in the sequence of intervals so constructed.
+#'
 #' @export
 confint_pois <- function(
 	n, b = 0, cl = 0.95, acc = 1e-3 * (max(n - b, 0) + 1),
