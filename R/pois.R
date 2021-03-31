@@ -1,7 +1,8 @@
 #' Poisson rate confidence intervals
+#' @md
 #' @description
 #' Build confidence intervals for the rate of a Poisson random variable using
-#' the Feldman-Cousins **ref** construction.
+#' the Feldman-Cousins construction (Feldman and Cousins, 1998).
 #' @param n number of events. Numeric vector of length one.
 #' @param b expected number of background events. Numeric vector of length one
 #' or three (see Details).
@@ -15,8 +16,9 @@
 #' default value (\code{NULL}) if unsure.
 #' @return a numeric vector of length two, containing the confidence interval
 #' endpoints.
-#' @details The Feldman-Cousins **ref** confidence intervals construction
-#' provides a unified treatment for the estimation of Poisson rates, which
+#' @details The Feldman-Cousins confidence intervals construction
+#' (Feldman and Cousins, 1998) provides a unified treatment for the estimation
+#' of Poisson rates, which
 #' produces consistent results for both the common case, where the number of
 #' observed events \code{n} is greater than the number of background events
 #' \code{b}, and the boundary cases, when \code{n} is equal or even less than
@@ -25,7 +27,7 @@
 #' this is the case for, *e.g.*, the intervals returned from
 #' \code{stats::poisson.test} for zero events and no background) or,
 #' even worse, undercovering and/or non-sensical confidence intervals
-#' (relevant examples can be found in Ref. **ref**).
+#' (relevant examples can be found in (Feldman and Cousins, 1998)).
 #'
 #' In order to find confidence intervals, the standard Neyman construction
 #' is performed over a grid of values for the estimated rate. The search
@@ -35,13 +37,15 @@
 #' in the majority of cases.
 #'
 #' The argument \code{b} controls the expected number of background events,
-#' which may differ from zero if not all counts are expected to correspond
-#' to genuine events. The number of total counts \code{n} is thus assumed to
-#' follow a Poisson distribution with rate \code{lambda + b}, with \code{b}
-#' known and \code{lambda} unknown and to be estimated.
+#' which would differ from zero if some of the event counts are expected
+#' to correspond to spurious events. In other words, the number of total counts
+#' \code{n} is assumed to follow a Poisson distribution with rate
+#' \code{lambda + b}, with \code{b} known and \code{lambda} unknown and to be
+#' estimated.
 #'
-#' Ref. **ref** discusses a minor correction to confidence intervals, which
-#' ensures that the produced upper limits are decreasing functions of \code{b}.
+#' The original reference discusses a minor correction to confidence intervals,
+#' which ensures that the produced upper limits are decreasing functions of
+#' \code{b}.
 #' This is computationally intensive and not necessary for the correctness of
 #' Feldman-Cousins confidence intervals, but may facilitate interpretation for
 #' e.g. sensitivity analyses.
@@ -51,7 +55,18 @@
 #' for \code{b} and a grid step. The construction is repeated over the whole
 #' grid of \code{b} values and the actual upper limit is chosen as the
 #' greatest upper limit encountered in the sequence of intervals so constructed.
+#' @references
+#' Feldman, Gary J. and Cousins, Robert D.
+#' "Unified approach to the classical statistical analysis of small signals"
+#' *Phys. Rev. D* **57**, issue 7 (1998): 3873-3889.
+#' @examples
+#' confint_pois(n = 10, cl = 0.68)
+#' confint_pois(n = 10, b = 5, cl = 0.68)
 #'
+#' # Compare:
+#' confint_pois(n = 0, cl = 0.95)
+#' # with:
+#' poisson.test(x = 0, conf.level = 0.95)$conf.int
 #' @export
 confint_pois <- function(
 	n, b = 0, cl = 0.95, acc = 1e-3 * (max(n - b, 0) + 1),
@@ -60,16 +75,16 @@ confint_pois <- function(
 {
 	check_args_pois(n, b, cl, acc, lambda_min, lambda_max)
 
-	grid <- pois_lambda_grid(n, b, cl, acc)
+	grid <- pois_lambda_grid(n, b, cl, acc, lambda_min, lambda_max)
 
 	if (length(b) == 3)
-		res <- pois_confint_cpp_adjusted(
+		res <- confint_pois_adj_cpp(
 			n, b[[1]], cl,
 			grid[["min"]], grid[["max"]], grid[["step"]],
 			b[[2]], b[[3]]
 			)
 	else
-		res <- pois_confint_cpp(
+		res <- confint_pois_cpp(
 			n, b, cl, grid[["min"]], grid[["max"]], grid[["step"]]
 			)
 
@@ -82,7 +97,27 @@ confint_pois <- function(
 #-------------------------------- Helpers -------------------------------------#
 check_args_pois <- function(n, b, cl, acc, lambda_min, lambda_max)
 {
-
+	tryCatch(
+		# try
+		{
+		assertthat::assert_that(
+			is_event_count(n),
+			is_non_negative(b),
+			is_probability(cl),
+			is_positive(acc)
+			)
+		if (!is.null(lambda_min))
+			assertthat::assert_that(is_non_negative(lambda_min))
+		if (!is.null(lambda_max))
+			assertthat::assert_that(is_non_negative(lambda_max))
+		if (!is.null(lambda_min) && !is.null(lambda_max))
+			assertthat::assert_that(lambda_min < lambda_max)
+		}
+		,
+		# catch
+		error = function(cnd)
+			rlang::abort(cnd$message, class = "domain_error")
+		)
 }
 
 pois_lambda_grid <- function(n, b, cl, acc, lambda_min, lambda_max)
@@ -95,7 +130,7 @@ pois_lambda_grid <- function(n, b, cl, acc, lambda_min, lambda_max)
 	if (is.null(lambda_min))
 		lambda_min <- max(0, n - b - hw)
 
-	if (!is.null(lambda_max))
+	if (is.null(lambda_max))
 		lambda_max <- max(n - b, 0) + hw
 
 	lambda_step <- min(acc, lambda_max - lambda_min) / 2

@@ -10,7 +10,7 @@ double binom_lik_ratio(int n, int N, double p, double b) {
 }
 
 // [[Rcpp::export]]
-std::vector<double> binom_confint_cpp(
+std::vector<double> confint_binom_cpp(
 		int n, int N, double cl,
 		double p_min, double p_max, double p_step
 )

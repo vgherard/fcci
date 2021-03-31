@@ -5,9 +5,9 @@
 
 using namespace Rcpp;
 
-// binom_confint_cpp
-std::vector<double> binom_confint_cpp(int n, int N, double cl, double p_min, double p_max, double p_step);
-RcppExport SEXP _fcci_binom_confint_cpp(SEXP nSEXP, SEXP NSEXP, SEXP clSEXP, SEXP p_minSEXP, SEXP p_maxSEXP, SEXP p_stepSEXP) {
+// confint_binom_cpp
+std::vector<double> confint_binom_cpp(int n, int N, double cl, double p_min, double p_max, double p_step);
+RcppExport SEXP _fcci_confint_binom_cpp(SEXP nSEXP, SEXP NSEXP, SEXP clSEXP, SEXP p_minSEXP, SEXP p_maxSEXP, SEXP p_stepSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -17,13 +17,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type p_min(p_minSEXP);
     Rcpp::traits::input_parameter< double >::type p_max(p_maxSEXP);
     Rcpp::traits::input_parameter< double >::type p_step(p_stepSEXP);
-    rcpp_result_gen = Rcpp::wrap(binom_confint_cpp(n, N, cl, p_min, p_max, p_step));
+    rcpp_result_gen = Rcpp::wrap(confint_binom_cpp(n, N, cl, p_min, p_max, p_step));
     return rcpp_result_gen;
 END_RCPP
 }
-// pois_confint_cpp
-std::vector<double> pois_confint_cpp(int n, double b, double cl, double lambda_min, double lambda_max, double lambda_step);
-RcppExport SEXP _fcci_pois_confint_cpp(SEXP nSEXP, SEXP bSEXP, SEXP clSEXP, SEXP lambda_minSEXP, SEXP lambda_maxSEXP, SEXP lambda_stepSEXP) {
+// confint_pois_cpp
+std::vector<double> confint_pois_cpp(int n, double b, double cl, double lambda_min, double lambda_max, double lambda_step);
+RcppExport SEXP _fcci_confint_pois_cpp(SEXP nSEXP, SEXP bSEXP, SEXP clSEXP, SEXP lambda_minSEXP, SEXP lambda_maxSEXP, SEXP lambda_stepSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -33,13 +33,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type lambda_min(lambda_minSEXP);
     Rcpp::traits::input_parameter< double >::type lambda_max(lambda_maxSEXP);
     Rcpp::traits::input_parameter< double >::type lambda_step(lambda_stepSEXP);
-    rcpp_result_gen = Rcpp::wrap(pois_confint_cpp(n, b, cl, lambda_min, lambda_max, lambda_step));
+    rcpp_result_gen = Rcpp::wrap(confint_pois_cpp(n, b, cl, lambda_min, lambda_max, lambda_step));
     return rcpp_result_gen;
 END_RCPP
 }
-// pois_confint_cpp_adjusted
-std::vector<double> pois_confint_cpp_adjusted(int n, double b, double cl, double lambda_min, double lambda_max, double lambda_step, double b_max, double b_step);
-RcppExport SEXP _fcci_pois_confint_cpp_adjusted(SEXP nSEXP, SEXP bSEXP, SEXP clSEXP, SEXP lambda_minSEXP, SEXP lambda_maxSEXP, SEXP lambda_stepSEXP, SEXP b_maxSEXP, SEXP b_stepSEXP) {
+// confint_pois_adj_cpp
+std::vector<double> confint_pois_adj_cpp(int n, double b, double cl, double lambda_min, double lambda_max, double lambda_step, double b_max, double b_step);
+RcppExport SEXP _fcci_confint_pois_adj_cpp(SEXP nSEXP, SEXP bSEXP, SEXP clSEXP, SEXP lambda_minSEXP, SEXP lambda_maxSEXP, SEXP lambda_stepSEXP, SEXP b_maxSEXP, SEXP b_stepSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -51,15 +51,15 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type lambda_step(lambda_stepSEXP);
     Rcpp::traits::input_parameter< double >::type b_max(b_maxSEXP);
     Rcpp::traits::input_parameter< double >::type b_step(b_stepSEXP);
-    rcpp_result_gen = Rcpp::wrap(pois_confint_cpp_adjusted(n, b, cl, lambda_min, lambda_max, lambda_step, b_max, b_step));
+    rcpp_result_gen = Rcpp::wrap(confint_pois_adj_cpp(n, b, cl, lambda_min, lambda_max, lambda_step, b_max, b_step));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_fcci_binom_confint_cpp", (DL_FUNC) &_fcci_binom_confint_cpp, 6},
-    {"_fcci_pois_confint_cpp", (DL_FUNC) &_fcci_pois_confint_cpp, 6},
-    {"_fcci_pois_confint_cpp_adjusted", (DL_FUNC) &_fcci_pois_confint_cpp_adjusted, 8},
+    {"_fcci_confint_binom_cpp", (DL_FUNC) &_fcci_confint_binom_cpp, 6},
+    {"_fcci_confint_pois_cpp", (DL_FUNC) &_fcci_confint_pois_cpp, 6},
+    {"_fcci_confint_pois_adj_cpp", (DL_FUNC) &_fcci_confint_pois_adj_cpp, 8},
     {NULL, NULL, 0}
 };
 

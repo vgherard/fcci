@@ -10,7 +10,7 @@ double pois_lik_ratio(int n, double lambda, double b) {
 }
 
 // [[Rcpp::export]]
-std::vector<double> pois_confint_cpp(
+std::vector<double> confint_pois_cpp(
 		int n, double b, double cl,
 		double lambda_min, double lambda_max, double lambda_step
 	)
@@ -56,19 +56,19 @@ std::vector<double> pois_confint_cpp(
 }
 
 // [[Rcpp::export]]
-std::vector<double> pois_confint_cpp_adjusted(
+std::vector<double> confint_pois_adj_cpp(
 		int n, double b, double cl,
 		double lambda_min, double lambda_max, double lambda_step,
 		double b_max = 0, double b_step = 0
 	)
 {
 	std::vector<double> res =
-		pois_confint_cpp(n, b, cl, lambda_min, lambda_max, lambda_step);
+		confint_pois_cpp(n, b, cl, lambda_min, lambda_max, lambda_step);
 
 	b += b_step;
 	for (; b < b_max; b += b_step) {
 		std::vector<double> tmp =
-			pois_confint_cpp(
+			confint_pois_cpp(
 				n, b, cl, lambda_min, lambda_max, lambda_step);
 		res[1] = std::max(res[1], tmp[1]);
 	}
