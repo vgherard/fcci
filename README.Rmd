@@ -18,17 +18,17 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-`fcci` provides support for building [Feldman-Cousins](https://doi.org/10.1103/PhysRevD.57.3873) confidence 
+`fcci` is an R package providing support for building [Feldman-Cousins](https://doi.org/10.1103/PhysRevD.57.3873) confidence 
 intervals.
 
+## Motivation
+
 The Feldman-Cousins construction was originally developed in the context of 
-High-Energy Physics, as a consistent method for the estimation of Poisson rates 
-of very rare events. In experiments which expect very few events, it is often 
-the case that the number of observed events is actually zero or, more generally, 
-lower than the expected number of spurious background events (if the 
-latter is significantly larger than zero). In these situations, usual central intervals (such as those produced by `stats::poisson.test()`) are not 
-satisfying, as they can lead both to overcoverage and to non-physical negative 
-rates in the presence of a non-negligible background.
+High-Energy Physics, as a consistent method for building classical (frequentist) confidence intervals for Poisson rates of rare events. In experiments which expect only few events, it is often the case that the number of observed events is actually zero or, more generally, lower than the expected number of spurious background events (if the latter is significantly larger than zero). 
+
+In these situations, classical central intervals (such as those produced by `stats::poisson.test()`) are not satisfying, as they can lead both to overcoverage and to non-physical negative rates in the presence of a non-negligible background. Moreover, a naive special treatment of boundary values, which chooses to report an upper limit or a confidence interval depending on the data (the so-called ["flip-flopping" policy](https://doi.org/10.1103/PhysRevD.57.3873)), leads to undercoverage.
+
+Feldman and Cousins provide a unified treatment of boundary and regular values, by explicitly constructing the [Neyman confidence belt](https://en.wikipedia.org/wiki/Neyman_construction) for physical rates, using an ordering for count values based on a likelihood ratio.
 
 ## Installation
 
