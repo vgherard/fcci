@@ -31,7 +31,7 @@ test_that("agreement with few cases from Felmdan-Cousins paper",
 	ee(confint_pois(n = 0, b = 0), c(0.00, 3.09))
 	ee(confint_pois(n = 10, b = 2), c(2.92, 15.82))
 
-	# Special case which requires the 'b' correction for agreement
+	# Special case which requires the 'b' correction for agreement with FC
 	n <- 0; b <- 2; cl <- 0.9
 	expected <- c(0, 1.26)
 	actual <- confint_pois(n = n, b = b, cl = cl)
