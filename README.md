@@ -7,6 +7,7 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/vgherard/fcci/branch/master/graph/badge.svg)](https://codecov.io/gh/vgherard/fcci?branch=master)
+[![R-CMD-check](https://github.com/vgherard/fcci/workflows/R-CMD-check/badge.svg)](https://github.com/vgherard/fcci/actions)
 <!-- badges: end -->
 
 `fcci` is an R package providing support for building
