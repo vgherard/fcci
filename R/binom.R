@@ -45,7 +45,7 @@ check_args_binom <- function(n, N, cl, acc)
 			is_event_count(n),
 			is_event_count(N), N > 0,
 			n <= N,
-			is_probability(cl),
+			is_probability(cl), cl > 0, cl < 1,
 			is_positive(acc)
 			)
 		,
