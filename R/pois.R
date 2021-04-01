@@ -104,8 +104,11 @@ check_args_pois <- function(n, b, cl, acc, lambda_min, lambda_max)
 		{
 		assertthat::assert_that(
 			is_event_count(n),
-			is_non_negative(b),
-			is_probability(cl),
+			is.numeric(b), length(b) %in% c(1, 3),
+			is_non_negative(b[[1]]),
+			length(b) == 1 || b[[2]] > b[[1]],
+			length(b) == 1 || is_positive(b[[3]]),
+			is_probability(cl), cl > 0, cl < 1,
 			is_positive(acc)
 			)
 		if (!is.null(lambda_min))
@@ -146,7 +149,7 @@ check_truncation_pois <- function(res, grid) {
 		x <- "Lower limit might be overestimated due to grid size."
 		i <- paste0("Try reducing 'lambda_min' or improving 'acc',",
 			    "until this warning stops to appear.")
-		rlang::warn(c(h, x = x, i = i), class = "ci_estimation_warning")
+		rlang::warn(c(h, x = x, i = i), class = "truncation_warning")
 	}
 
 	if (res[[2]] == grid[["max"]]) {
@@ -154,6 +157,6 @@ check_truncation_pois <- function(res, grid) {
 		x <- "Upper limit might be underestimated due to grid size."
 		i <- paste0("Try increasing 'lambda_max' or improving 'acc',",
 			    "until this warning stops to appear.")
-		rlang::warn(c(h, x = x, i = i), class = "ci_estimation_warnng")
+		rlang::warn(c(h, x = x, i = i), class = "truncation_warning")
 	}
 }
