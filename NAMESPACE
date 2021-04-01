@@ -3,4 +3,5 @@
 export(confint_binom)
 export(confint_pois)
 importFrom(Rcpp,sourceCpp)
+importFrom(stats,qnorm)
 useDynLib(fcci, .registration = TRUE)

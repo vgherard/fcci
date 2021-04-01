@@ -6,5 +6,6 @@
 ## usethis namespace: start
 #' @useDynLib fcci, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
+#' @importFrom stats qnorm
 ## usethis namespace: end
 NULL

@@ -20,7 +20,7 @@ RoxygenNote: 7.1.1
 LinkingTo: 
     Rcpp
 Imports: 
-    Rcpp
+    Rcpp, assertthat, rlang
 URL: https://github.com/vgherard/fcci
 BugReports: https://github.com/vgherard/fcci/issues
 Suggests: 
