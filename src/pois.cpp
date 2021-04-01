@@ -17,7 +17,7 @@ std::vector<double> confint_pois_cpp(
 {
 	size_t grid_len = (lambda_max - lambda_min) / lambda_step + 1;
 
-	double lambda_up, lambda_lo;
+	double lambda_up = lambda_min, lambda_lo = lambda_min;
 	bool found_lo = false;
 
 	for (size_t i = 0; i < grid_len; ++i)
@@ -37,7 +37,7 @@ std::vector<double> confint_pois_cpp(
 		while (prob < cl) {
 			double R_l = pois_lik_ratio(l - 1, lambda, b);
 			double R_r = pois_lik_ratio(r + 1, lambda, b);
-			if (R_r  > R_l)
+			if (R_r > R_l)
 				prob += R::dpois(++r, lambda + b, 0);
 			else
 				prob += R::dpois(--l, lambda + b, 0);
