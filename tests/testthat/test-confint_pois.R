@@ -26,5 +26,5 @@ test_that("checks truncation", {
 		)
 	expect_warning(
 		confint_pois(0, lambda_min = 0.5), class = "truncation_warning"
-	)
+		)
 })
