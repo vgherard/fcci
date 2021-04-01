@@ -90,6 +90,8 @@ confint_pois <- function(
 
 	check_truncation_pois(res, grid)
 
+	attr(res, "cl") <- cl
+
 	return(res)
 }
 

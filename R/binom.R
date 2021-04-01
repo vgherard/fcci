@@ -29,6 +29,8 @@ confint_binom <- function(n, N, cl = 0.95, acc = 1e-3)
 	res <- confint_binom_cpp(n = n, N = N, cl = cl,
 				 p_min = 0, p_max = 1, p_step = acc / 2)
 
+	attr(res, "cl") <- cl
+
 	return(res)
 }
 
