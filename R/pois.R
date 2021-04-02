@@ -88,7 +88,7 @@ confint_pois <- function(
 			n, b, cl, grid[["min"]], grid[["max"]], grid[["step"]]
 			)
 
-	check_truncation_pois(res, grid)
+	check_truncation_pois(res, grid, acc)
 
 	attr(res, "cl") <- cl
 
@@ -143,8 +143,8 @@ pois_lambda_grid <- function(n, b, cl, acc, lambda_min, lambda_max)
 	return( list(min = lambda_min, max = lambda_max, step = lambda_step) )
 }
 
-check_truncation_pois <- function(res, grid) {
-	if (res[[1]] == grid[["min"]] & res[[1]] > 0) {
+check_truncation_pois <- function(res, grid, acc) {
+	if (grid[["min"]] + acc > res[[1]] & res[[1]] > 0) {
 		h <- "Lower endpoint truncation"
 		x <- "Lower limit might be overestimated due to grid size."
 		i <- paste0("Try reducing 'lambda_min' or improving 'acc',",
@@ -152,7 +152,7 @@ check_truncation_pois <- function(res, grid) {
 		rlang::warn(c(h, x = x, i = i), class = "truncation_warning")
 	}
 
-	if (res[[2]] == grid[["max"]]) {
+	if (res[[2]] + acc > grid[["max"]]) {
 		h <- "Upper endpoint truncation"
 		x <- "Upper limit might be underestimated due to grid size."
 		i <- paste0("Try increasing 'lambda_max' or improving 'acc',",
