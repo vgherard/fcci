@@ -1,12 +1,20 @@
 #include <Rcpp.h>
 #include <Rmath.h>
+#include <cmath>
+#include <limits>
 #include <vector>
 using namespace Rcpp;
 
-double pois_lik_ratio(int n, double lambda, double b) {
+double lik_ratio_pois(int n, double lambda, double b) {
 	if (n < 0)
-		return 0;
-	return R::dpois(n, lambda + b, 0) / R::dpois(n, n - b > 0 ? n : b, 0);
+		return -std::numeric_limits<double>::infinity();
+	double rate = lambda + b;
+	double rate_best = n > b ? n : b;
+	if (rate_best < std::numeric_limits<double>::epsilon())
+		return -(lambda + b);
+	if (rate < std::numeric_limits<double>::epsilon())
+		return -std::numeric_limits<double>::infinity();
+	return n * std::log(rate / rate_best) - rate + rate_best;
 }
 
 // [[Rcpp::export]]
@@ -23,20 +31,20 @@ std::vector<double> confint_pois_cpp(
 	for (size_t i = 0; i < grid_len; ++i)
 	{
 		double lambda = lambda_min + lambda_step * i;
-		int l, r; double Rbest = 0;
+		int l, r; double Rbest = -std::numeric_limits<double>::infinity();
 
 		// One of these three points maximizes the likelihood ratio
 		for (int m : {(int)b, (int)(lambda + b), (int)(lambda + b) + 1})
 		{
-			double R = pois_lik_ratio(m, lambda, b);
+			double R = lik_ratio_pois(m, lambda, b);
 			if (R > Rbest) { l = r = m; Rbest = R; }
 		}
 
 		double prob = R::dpois(l, lambda + b, 0);
 
 		while (prob < cl) {
-			double R_l = pois_lik_ratio(l - 1, lambda, b);
-			double R_r = pois_lik_ratio(r + 1, lambda, b);
+			double R_l = lik_ratio_pois(l - 1, lambda, b);
+			double R_r = lik_ratio_pois(r + 1, lambda, b);
 			if (R_r > R_l)
 				prob += R::dpois(++r, lambda + b, 0);
 			else
