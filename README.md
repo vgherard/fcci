@@ -87,3 +87,10 @@ stats::poisson.test(0, conf.level = 0.84, alternative = "less")$conf.int
 #> attr(,"conf.level")
 #> [1] 0.84
 ```
+
+## Getting Help
+
+For further help, you can consult the reference page of the `fcci`
+[website](https://vgherard.github.io/fcci/) or [open an
+issue](https://github.com/vgherard/fcci/issues) on the GitHub repository
+of `fcci`.

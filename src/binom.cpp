@@ -34,12 +34,6 @@ struct BinomialFeldmanCousins : public DiscreteFeldmanCousins {
 	) : DiscreteFeldmanCousins(n, cl, p_min, p_max, p_step), N_(N) {}
 };
 
-double binom_lik_ratio(int n, int N, double p, double b) {
-	if (n < 0)
-		return 0;
-	return R::dbinom(n, N, p, 0) / R::dbinom(n, N, (double)n / N, 0);
-}
-
 // [[Rcpp::export]]
 Rcpp::NumericVector confint_binom_cpp(
 		int n, int N, double cl,

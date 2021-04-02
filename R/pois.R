@@ -34,7 +34,7 @@
 #' interval can be controlled through the parameters \code{lambda_min} and
 #' \code{lambda_max}; if these are left as default (\code{NULL}), they are
 #' estimated automatically based on a rough estimate, which should be adequate
-#' in the majority of cases.
+#' in a large majority of cases.
 #'
 #' The argument \code{b} controls the expected number of background events,
 #' which would differ from zero if some of the event counts are expected
