@@ -6,7 +6,7 @@
 using namespace Rcpp;
 
 // confint_binom_cpp
-std::vector<double> confint_binom_cpp(int n, int N, double cl, double p_min, double p_max, double p_step);
+Rcpp::NumericVector confint_binom_cpp(int n, int N, double cl, double p_min, double p_max, double p_step);
 RcppExport SEXP _fcci_confint_binom_cpp(SEXP nSEXP, SEXP NSEXP, SEXP clSEXP, SEXP p_minSEXP, SEXP p_maxSEXP, SEXP p_stepSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -22,7 +22,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // confint_pois_cpp
-std::vector<double> confint_pois_cpp(int n, double b, double cl, double lambda_min, double lambda_max, double lambda_step);
+Rcpp::NumericVector confint_pois_cpp(int n, double b, double cl, double lambda_min, double lambda_max, double lambda_step);
 RcppExport SEXP _fcci_confint_pois_cpp(SEXP nSEXP, SEXP bSEXP, SEXP clSEXP, SEXP lambda_minSEXP, SEXP lambda_maxSEXP, SEXP lambda_stepSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -38,7 +38,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // confint_pois_adj_cpp
-std::vector<double> confint_pois_adj_cpp(int n, double b, double cl, double lambda_min, double lambda_max, double lambda_step, double b_max, double b_step);
+Rcpp::NumericVector confint_pois_adj_cpp(int n, double b, double cl, double lambda_min, double lambda_max, double lambda_step, double b_max, double b_step);
 RcppExport SEXP _fcci_confint_pois_adj_cpp(SEXP nSEXP, SEXP bSEXP, SEXP clSEXP, SEXP lambda_minSEXP, SEXP lambda_maxSEXP, SEXP lambda_stepSEXP, SEXP b_maxSEXP, SEXP b_stepSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

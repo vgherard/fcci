@@ -6,9 +6,8 @@
 \alias{fcci-package}
 \title{fcci: Feldman-Cousins Confidence Intervals}
 \description{
-Utilities for building Feldman-Cousins confidence intervals 
-	[G. J. Feldman and R. D. Cousins (1998) <doi:https://doi.org/10.1103/PhysRevD.57.3873>]
-	for Poisson rates and binomial proportions.
+Provides support for building Feldman-Cousins confidence intervals 
+	[G. J. Feldman and R. D. Cousins (1998) <doi:10.1103/PhysRevD.57.3873>].
 }
 \seealso{
 Useful links:

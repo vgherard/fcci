@@ -1,7 +1,38 @@
+// [[Rcpp::plugins(cpp11)]]
+#include "DiscreteFeldmanCousins.h"
 #include <Rcpp.h>
 #include <Rmath.h>
-#include <vector>
-using namespace Rcpp;
+
+struct BinomialFeldmanCousins : public DiscreteFeldmanCousins {
+
+	int N_;
+
+	double lik_ratio(int m) {
+		return m < 0 ? 0 :
+			R::dbinom(m, N_, t_, 0) /
+			R::dbinom(m, N_, (double)m / N_, 0);
+		}
+
+	double prob(int m) { return R::dbinom(m, N_, t_, 0); }
+
+	int top_n() {
+		int res = 0;
+		double Rbest = 0;
+
+		for (int m : {(int) (t_ * N_), (int)(t_ * N_) + 1})
+		{
+			double R = lik_ratio(m);
+			if (R > Rbest) { res = m; Rbest = R; }
+		}
+
+		return res;
+	}
+
+	BinomialFeldmanCousins(
+		int n, int N, double cl,
+		double p_min, double p_max, double p_step
+	) : DiscreteFeldmanCousins(n, cl, p_min, p_max, p_step), N_(N) {}
+};
 
 double binom_lik_ratio(int n, int N, double p, double b) {
 	if (n < 0)
@@ -10,46 +41,11 @@ double binom_lik_ratio(int n, int N, double p, double b) {
 }
 
 // [[Rcpp::export]]
-std::vector<double> confint_binom_cpp(
+Rcpp::NumericVector confint_binom_cpp(
 		int n, int N, double cl,
 		double p_min, double p_max, double p_step
 )
 {
-	size_t grid_len = (p_max - p_min) / p_step + 1;
-
-	double p_up, p_lo;
-	bool found_lo = false;
-
-	for (size_t i = 0; i < grid_len; ++i)
-	{
-		double p = p_min + p_step * i;
-		int l, r; double Rbest = 0;
-
-		// One of these two points maximizes the likelihood ratio
-		for (int m : {(int) (p * N), (int)(p * N) + 1})
-		{
-			double R = binom_lik_ratio(m, N, p, 0);
-			if (R > Rbest) { l = r = m; Rbest = R; }
-		}
-
-		double prob = R::dbinom(l, N, p, 0);
-
-		while (prob < cl) {
-			double R_l = binom_lik_ratio(l - 1, N, p, 0);
-			double R_r = binom_lik_ratio(r + 1, N, p, 0);
-			if (R_r  > R_l)
-				prob += R::dbinom(++r, N, p, 0);
-			else
-				prob += R::dbinom(--l, N, p, 0);
-		}
-		if ((l <= n) & (n <= r)) {
-			p_up = p;
-			if (not found_lo) {
-				p_lo = p;
-				found_lo = true;
-			}
-		}
-	}
-
-	return {p_lo, p_up};
+	BinomialFeldmanCousins fc(n, N, cl, p_min, p_max, p_step);
+	return fc.confint();
 }

@@ -9,7 +9,7 @@ confint_pois_cpp <- function(n, b, cl, lambda_min, lambda_max, lambda_step) {
     .Call(`_fcci_confint_pois_cpp`, n, b, cl, lambda_min, lambda_max, lambda_step)
 }
 
-confint_pois_adj_cpp <- function(n, b, cl, lambda_min, lambda_max, lambda_step, b_max = 0, b_step = 0) {
+confint_pois_adj_cpp <- function(n, b, cl, lambda_min, lambda_max, lambda_step, b_max, b_step) {
     .Call(`_fcci_confint_pois_adj_cpp`, n, b, cl, lambda_min, lambda_max, lambda_step, b_max, b_step)
 }
 
