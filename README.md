@@ -42,7 +42,14 @@ rates, using an ordering for count values based on a likelihood ratio.
 
 ## Installation
 
-You can install the development version of `fcci` from
+You can install the latest release of `fcci` from
+[CRAN](https://CRAN.R-project.org/package=fcci) using:
+
+``` r
+install.packages("fcci")
+```
+
+and the development version from
 [GitHub](https://github.com/vgherard/fcci) with:
 
 ``` r

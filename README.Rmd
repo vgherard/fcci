@@ -35,8 +35,13 @@ Feldman and Cousins provide a unified treatment of boundary and regular values, 
 
 ## Installation
 
-You can install the development version of `fcci` from 
-[GitHub](https://github.com/vgherard/fcci) with:
+You can install the latest release of `fcci` from [CRAN](https://CRAN.R-project.org/package=fcci) using:
+
+``` r
+install.packages("fcci")
+```
+
+and the development version from [GitHub](https://github.com/vgherard/fcci) with:
 
 ``` r
 # install.packages("devtools")
