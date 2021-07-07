@@ -10,6 +10,7 @@ status](https://www.r-pkg.org/badges/version/fcci)](https://CRAN.R-project.org/p
 [![R-CMD-check](https://github.com/vgherard/fcci/workflows/R-CMD-check/badge.svg)](https://github.com/vgherard/fcci/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/vgherard/fcci/branch/master/graph/badge.svg)](https://codecov.io/gh/vgherard/fcci?branch=master)
+[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=%7Bfcci%7D:%20Feldman-Cousins%20Confidence%20Intervals%20in%20R&url=https://vgherard.github.io/r2r&via=ValerioGherardi&hashtags=rstats,statistics,physics,confidenceintervals)
 <!-- badges: end -->
 
 `fcci` is an R package providing support for building
