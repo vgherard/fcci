@@ -6,9 +6,9 @@ Authors@R:
     person(given = "Valerio",
            family = "Gherardi",
            role = c("aut", "cre"),
-           email = "vgherard@sissa.it",
+           email = "vgherard840@gmail.com",
            comment = c(ORCID = "0000-0002-8215-3013"))
-Maintainer: Valerio Gherardi <vgherard@sissa.it>
+Maintainer: Valerio Gherardi <vgherard840@gmail.com>
 Description: 
 	Provides support for building Feldman-Cousins confidence intervals 
 	[G. J. Feldman and R. D. Cousins (1998) <doi:10.1103/PhysRevD.57.3873>].
