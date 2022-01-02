@@ -55,7 +55,7 @@ You can install the latest release of `fcci` from
 install.packages("fcci")
 ```
 
-and the development version from \`[my
+and the development version from [my
 R-universe](https://vgherard.r-universe.dev/) with:
 
 ``` r

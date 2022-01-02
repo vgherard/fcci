@@ -44,7 +44,7 @@ You can install the latest release of `fcci` from [CRAN](https://CRAN.R-project.
 install.packages("fcci")
 ```
 
-and the development version from `[my R-universe](https://vgherard.r-universe.dev/) with:
+and the development version from [my R-universe](https://vgherard.r-universe.dev/) with:
 
 ``` r
 install.packages("fcci", repos = "https://vgherard.r-universe.dev/")
