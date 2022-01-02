@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // confint_binom_cpp
 Rcpp::NumericVector confint_binom_cpp(int n, int N, double cl, double p_min, double p_max, double p_step);
 RcppExport SEXP _fcci_confint_binom_cpp(SEXP nSEXP, SEXP NSEXP, SEXP clSEXP, SEXP p_minSEXP, SEXP p_maxSEXP, SEXP p_stepSEXP) {
