@@ -1,8 +1,8 @@
-url: https://vgherard.github.io/fcci/
+url: https://vgherard.github.io/fcci
 development:
   mode: auto
-
 home:
   links:
   - text: Feldman-Cousins original paper
     href: https://journals.aps.org/prd/abstract/10.1103/PhysRevD.57.3873/
+
