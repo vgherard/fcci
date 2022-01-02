@@ -1,6 +1,6 @@
 test_that("Test of correct coverage for 10 random 'lambda's and 1 random 'b'", {
 	cl <- 0.95
-	tol <- 2 * 1e-3
+	tol <- 1e-3
 
 	b_max <- 10
 	b <- floor(runif(1, min = 0, max = b_max))
@@ -12,7 +12,7 @@ test_that("Test of correct coverage for 10 random 'lambda's and 1 random 'b'", {
 
 	n_max <- b + max(lambda) + 10 * sqrt(b + max(lambda))
 	for (n in 0:n_max) {
-		ci <- confint_pois(n, b = b)
+		ci <- confint_pois(n, b = b, acc = tol / 2)
 		mask <- ci[[1]] <= lambda * (1 + tol) &
 			lambda * (1 - tol) <= ci[[2]]
 		prob_n <- dpois(n, lambda + b)
