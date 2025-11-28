@@ -1,7 +1,7 @@
 Package: fcci
 Type: Package
 Title: Feldman-Cousins Confidence Intervals
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: 
     person(given = "Valerio",
            family = "Gherardi",
@@ -14,12 +14,11 @@ Description:
 	[G. J. Feldman and R. D. Cousins (1998) <doi:10.1103/PhysRevD.57.3873>].
 License: GPL (>= 3)
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.3
 LinkingTo: 
     Rcpp
 Imports: 
     Rcpp, assertthat, rlang
-SystemRequirements: C++11
 URL: https://github.com/vgherard/fcci,
     https://vgherard.github.io/fcci/
 BugReports: https://github.com/vgherard/fcci/issues

@@ -6,19 +6,19 @@
 \alias{fcci-package}
 \title{fcci: Feldman-Cousins Confidence Intervals}
 \description{
-Provides support for building Feldman-Cousins confidence intervals 
-	[G. J. Feldman and R. D. Cousins (1998) <doi:10.1103/PhysRevD.57.3873>].
+Provides support for building Feldman-Cousins confidence intervals [G. J. Feldman and R. D. Cousins (1998) \doi{10.1103/PhysRevD.57.3873}].
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://github.com/vgherard/fcci}
+  \item \url{https://vgherard.github.io/fcci/}
   \item Report bugs at \url{https://github.com/vgherard/fcci/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Valerio Gherardi \email{vgherard@sissa.it} (\href{https://orcid.org/0000-0002-8215-3013}{ORCID})
+\strong{Maintainer}: Valerio Gherardi \email{vgherard840@gmail.com} (\href{https://orcid.org/0000-0002-8215-3013}{ORCID})
 
 }
 \keyword{internal}
