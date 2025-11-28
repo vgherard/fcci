@@ -8,15 +8,14 @@
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![R-CMD-check](https://github.com/vgherard/fcci/workflows/R-CMD-check/badge.svg)](https://github.com/vgherard/fcci/actions)
+[![R-CMD-check](https://github.com/vgherard/fcci/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/vgherard/fcci/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/vgherard/fcci/branch/master/graph/badge.svg)](https://app.codecov.io/gh/vgherard/fcci?branch=master)
+coverage](https://codecov.io/gh/vgherard/fcci/graph/badge.svg)](https://app.codecov.io/gh/vgherard/fcci)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/fcci)](https://CRAN.R-project.org/package=fcci)
 [![R-universe
 status](https://vgherard.r-universe.dev/badges/fcci)](https://vgherard.r-universe.dev/)
 [![Website](https://img.shields.io/badge/Website-here-blue)](https://vgherard.github.io/fcci/)
-[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=%7Bfcci%7D:%20Feldman-Cousins%20Confidence%20Intervals%20in%20R&url=https://vgherard.github.io/r2r&via=ValerioGherardi&hashtags=rstats,statistics,physics,confidenceintervals)
 <!-- badges: end -->
 
 `fcci` is an R package providing support for building
@@ -79,8 +78,8 @@ confint_pois(n = 10, b = 2, cl = 0.95)
 #> [1] 0.95
 ```
 
-Let us compare the 68% C.L. intervals for *n* = 0 events and no
-background obtained from `fcci` and from `stats::poisson.test()`
+Let us compare the 68% C.L. intervals for $n=0$ events and no background
+obtained from `fcci` and from `stats::poisson.test()`
 
 ``` r
 confint_pois(n = 0, cl = 0.68)
