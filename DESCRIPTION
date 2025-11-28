@@ -14,7 +14,7 @@ Description:
 	[G. J. Feldman and R. D. Cousins (1998) <doi:10.1103/PhysRevD.57.3873>].
 License: GPL (>= 3)
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.3
 LinkingTo: 
     Rcpp
 Imports: 
