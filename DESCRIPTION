@@ -19,7 +19,6 @@ LinkingTo:
     Rcpp
 Imports: 
     Rcpp, assertthat, rlang
-SystemRequirements: C++11
 URL: https://github.com/vgherard/fcci,
     https://vgherard.github.io/fcci/
 BugReports: https://github.com/vgherard/fcci/issues
