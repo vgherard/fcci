@@ -1,7 +1,7 @@
 Package: fcci
 Type: Package
 Title: Feldman-Cousins Confidence Intervals
-Version: 1.0.1.9000
+Version: 1.0.2
 Authors@R: 
     person(given = "Valerio",
            family = "Gherardi",

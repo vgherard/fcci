@@ -1,4 +1,4 @@
-# fcci (development version)
+# fcci 1.0.2
 
 * Removed C++11 specification in dependencies: the default C++17 suffices.
 
