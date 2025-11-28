@@ -1,14 +1,8 @@
-# fcci v1.0.1
+## v1.0.2
 
-This is a minor patch release fixing a test causing R CMD CHECK failure.
+This is patch release with the only purpose of removing the C++11 specification
+from package requirements (no longer needed as the current default is C++17).
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-```
-* New maintainer:
-  Valerio Gherardi <vgherard840@gmail.com>
-```
-
-The maintainer has changed email address.
+0 errors | 0 warnings | 0 note
